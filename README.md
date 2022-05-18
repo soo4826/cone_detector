@@ -1,4 +1,4 @@
-# Cone Detector for track mission
+# Cone Detector for track driving mission
 
 ## Cone Detection Process
 1. Filter ground point using `ray_ground_filter` and generate `no_ground` pointcloud
