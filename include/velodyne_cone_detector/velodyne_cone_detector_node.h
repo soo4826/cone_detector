@@ -188,7 +188,7 @@ namespace LIDAR {
             // 주변 물체 때문에 너무 많은 cluster가 생겨서 클러스터가 자꾸 사라짐
             // 백파일 재로깅 필요
 
-            int fittingCone = 4;
+            int fittingCone = 6;
             if (cones.size() >= fittingCone ){
                 // 거리 기준으로 상위 6개 sort
                 sortCones(cones, 0, fittingCone);
@@ -196,8 +196,10 @@ namespace LIDAR {
                 std::vector<std::vector<double>> sortedCones = sortCones(cones, 2, fittingCone);
                 markCones(sortedCones);
                 // 상위 3개와 하위 3개에 대해 콘끼리 중심점 연산 및 Curve Fittitng
-                std::vector<double> rCoefs = curveFitting2(std::vector<std::vector<double>>(sortedCones.begin(), sortedCones.begin()+1));
-                std::vector<double> lCoefs = curveFitting2(std::vector<std::vector<double>>(sortedCones.begin()+2, sortedCones.end()));
+                std::vector<double> rCoefs = curveFitting3(std::vector<std::vector<double>>(sortedCones.begin(), sortedCones.begin()+1));
+                std::vector<double> lCoefs = curveFitting3(std::vector<std::vector<double>>(sortedCones.begin()+3, sortedCones.end()));
+                // std::vector<double> rCoefs = curveFitting2(std::vector<std::vector<double>>(sortedCones.begin(), sortedCones.begin()+1));
+                // std::vector<double> lCoefs = curveFitting2(std::vector<std::vector<double>>(sortedCones.begin()+2, sortedCones.end()));
                 
                 // vis Trajectory!!
                 visTrajectory(rCoefs, 0.3, 15, 0);
